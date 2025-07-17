@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "multi-trader-backend": {
+      "main": "src/multi-trader-backend/main.mo",
+      "type": "motoko"
+    },
+    "multi-trader-frontend": {
+      "dependencies": [
+        "multi-trader-backend"
+      ],
+      "source": [
+        "src/multi-trader-frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "multi-trader-frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
