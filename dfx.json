@@ -1,8 +1,24 @@
 {
   "canisters": {
+    "evm_rpc": {
+      "type": "pull",
+      "id": "7hfb6-caaaa-aaaar-qadga-cai"
+    },
     "multi-trader-backend": {
       "main": "src/multi-trader-backend/main.mo",
       "type": "motoko"
+    },
+    "wallet": {
+      "dependencies": ["evm_rpc"],
+      "main": "src/multi-trader-backend/Wallet/wallet.mo",
+      "type": "motoko",
+      "args": "--enhanced-orthogonal-persistence"
+    },
+    "uniswap": {
+      "dependencies": ["evm_rpc"],
+      "main": "src/multi-trader-backend/Uniswap/uniswap.mo",
+      "type": "motoko",
+      "args": "--enhanced-orthogonal-persistence"
     },
     "multi-trader-frontend": {
       "dependencies": [
@@ -13,12 +29,23 @@
       ],
       "type": "assets",
       "workspace": "multi-trader-frontend"
+    },
+    "internet_identity": {
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "type": "custom",
+      "specified_id": "rdmx6-jaaaa-aaaaa-aaadq-cai",
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
     }
   },
   "defaults": {
     "build": {
       "args": "",
-      "packtool": ""
+      "packtool": "mops sources"
     }
   },
   "output_env_file": ".env",

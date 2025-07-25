@@ -1,49 +1,44 @@
-import { html, render } from 'lit-html';
-import { multi_trader_backend } from 'declarations/multi-trader-backend';
-import logo from './logo2.svg';
+import React from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { Switch, Route } from "wouter";
+import { createRoot } from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "./services/themes/ThemeContext";
+import { LanguageProvider } from "./services/i18n/LanguageContext";
+import Dashboard from "./pages/Dashboard";
 
-class App {
-  greeting = '';
-
-  constructor() {
-    this.#render();
-  }
-
-  #handleSubmit = async (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    this.greeting = await multi_trader_backend.greet(name);
-    this.#render();
-  };
-
-  #render() {
-  let body = html`
-    <main class="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center px-4">
-      <img src="${logo}" alt="DFINITY logo" class="w-32 h-32 mb-6" />
-      <form class="flex flex-col gap-4 w-full max-w-sm" action="#">
-        <label for="name" class="text-lg font-medium text-gray-700">Enter your name:</label>
-        <input
-          id="name"
-          type="text"
-          class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          placeholder="Your name"
-        />
-        <button
-          type="submit"
-          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
-        >
-          Click Me!
-        </button>
-      </form>
-      <section id="greeting" class="mt-6 text-xl font-semibold text-indigo-800">
-        ${this.greeting}
-      </section>
-    </main>
-  `;
-  render(body, document.getElementById('root'));
-  document.querySelector('form').addEventListener('submit', this.#handleSubmit);
+// 🧪 Test Component
+function TestPage() {
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold text-blue-600">This is a Test Page ✅</h1>
+      <p>You're seeing this because /test route is working.</p>
+    </div>
+  );
 }
 
+// Create a QueryClient instance
+const queryClient = new QueryClient();
+
+function Router() {
+  return (
+    <Switch>
+      <Route path="/" component={Dashboard} />
+      <Route path="/test" component={TestPage} /> {/* 👈 Add test route */}
+    </Switch>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <LanguageProvider>
+          <Router />
+        </LanguageProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
 }
 
 export default App;
