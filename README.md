@@ -1,5 +1,5 @@
 # 🧠 OMAXPro – Onchain Multichain Trading Platform
-![OMAXPro Preview](./assets/Pro.png)
+![OMAXPro Preview](./src//multi-trader-frontend//assets/Pro.png)
 
 Welcome to **OMAXPro**, a fully decentralized multichain trading platform built on the **Internet Computer Protocol (ICP)** using its revolutionary **Chain Fusion** technology.
 
