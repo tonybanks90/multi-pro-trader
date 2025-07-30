@@ -1,15 +1,75 @@
-# `multi-trader`
+# 🧠 OMAXPro – Onchain Multichain Trading Platform
 
-Welcome to your new `multi-trader` project and to the Internet Computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
+Welcome to **OMAXPro**, a fully decentralized multichain trading platform built on the **Internet Computer Protocol (ICP)** using its revolutionary **Chain Fusion** technology.
 
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
+OMAXPro allows users to trade assets natively across **Bitcoin (odin.fun)**, **Solana (Raydium, pump.fun)**, and **Ethereum (Uniswap)**—all from a single interface. Users sign in with **Bitcoin**, **Solana**, or **Ethereum** addresses and manage their assets using one unified wallet, generated and secured onchain via **chain-key cryptography**.
 
-To learn more before you start working with `multi-trader`, see the following documentation available online:
+---
 
-- [Quick Start](https://internetcomputer.org/docs/current/developer-docs/setup/deploy-locally)
-- [SDK Developer Tools](https://internetcomputer.org/docs/current/developer-docs/setup/install)
-- [Motoko Programming Language Guide](https://internetcomputer.org/docs/current/motoko/main/motoko)
-- [Motoko Language Quick Reference](https://internetcomputer.org/docs/current/motoko/main/language-manual)
+## 🚀 Key Features
+
+- 🔄 Native multichain trading: Bitcoin, Ethereum, and Solana
+- 🔐 Unified onchain wallet via chain-key cryptography
+- 🖥 Fully decentralized frontend hosted on ICP
+- 🛠 Canister-based orchestration with real-time RPC to external chains
+- 🤖 Future support for programmable onchain trading agents
+
+---
+
+## 🧱 Architecture Overview
+
+OMAXPro is composed of several smart canisters that coordinate wallet generation, trade execution, external chain access, and later AI agent logic:
+
+### 🔧 Wallet Manager Canister
+- Creates and manages BTC, ETH, and SOL addresses
+- Single sign-in experience using any supported chain
+- Onchain identity and unified balance tracking
+
+### 🔄 Trading Engine Canister
+- Executes and orchestrates trades across chains
+- Reads onchain market data via RPC
+- Sends signed transactions to Bitcoin, Ethereum, and Solana networks
+
+### 🔐 Chain Fusion Capabilities
+| Chain     | Mechanism                  | Features                              |
+|-----------|----------------------------|----------------------------------------|
+| Bitcoin   | Bitcoin adapter (native)   | UTXO, address generation, send tx      |
+| Ethereum  | EVM RPC canister           | Call contracts, parse logs, sign txs   |
+| Solana    | Solana RPC + EdDSA signing | Read accounts, interact with programs  |
+
+### 🖥 Frontend Canister
+- React-based interface, served onchain
+- Proxy-based development flow (Vite → DFX)
+- Uses `@dfinity/agent` for backend interaction
+
+### 🤖 Onchain Agents (Optional)
+- Programmable logic bots stored and run inside canisters
+- Monitor real-time onchain events
+- Execute decentralized strategies like arbitrage or DCA
+
+---
+
+## 🧪 Local Development Guide
+
+OMAXPro is initialized using the Internet Computer SDK (`dfx`) with full support for frontend and backend development.
+
+### 📦 Prerequisites
+
+- [DFX SDK](https://internetcomputer.org/docs/current/developer-docs/setup/install)
+- Node.js & npm
+
+### 📁 Project Structure
+
+```bash
+multi-trader/ (OMAXPro root)
+├── src/
+│   ├── multi-trader-backend/       # Canister logic (Motoko or Rust)
+│   ├── multi-trader-frontend/      # Web frontend (React + Vite)
+│  
+├── dfx.json                   # DFX config
+├── package.json               # NPM metadata
+└── README.md                  # You're here!
+
 
 If you want to start working on your project right away, you might want to try the following commands:
 
