@@ -1,4 +1,5 @@
 # 🧠 OMAXPro – Onchain Multichain Trading Platform
+![OMAXPro Preview](./assets/Pro.png)
 
 Welcome to **OMAXPro**, a fully decentralized multichain trading platform built on the **Internet Computer Protocol (ICP)** using its revolutionary **Chain Fusion** technology.
 
@@ -42,7 +43,7 @@ OMAXPro is composed of several smart canisters that coordinate wallet generation
 - Proxy-based development flow (Vite → DFX)
 - Uses `@dfinity/agent` for backend interaction
 
-### 🤖 Onchain Agents (Optional)
+### 🤖 Onchain Agents (later)
 - Programmable logic bots stored and run inside canisters
 - Monitor real-time onchain events
 - Execute decentralized strategies like arbitrage or DCA
