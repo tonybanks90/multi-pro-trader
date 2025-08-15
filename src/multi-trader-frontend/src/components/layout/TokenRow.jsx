@@ -3,9 +3,15 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/services/i18n/LanguageContext';
 import { ChartLine } from 'lucide-react';
+ // Import the token object
 
-export default function TokenRow({ token }) {
+export default function TokenRow() {
   const { t } = useLanguage();
+
+  console.log("TokenRow rendering... token =", token); // 🔍
+  console.log("TokenRow type of token:", typeof token);
+  console.log("TokenRow keys:", token ? Object.keys(token) : "token is undefined");
+
 
   const formatNumber = (value, suffix = '') => {
     const num = parseFloat(value);
@@ -83,14 +89,10 @@ export default function TokenRow({ token }) {
           <div className="min-w-0 flex-1">
             <div className="flex items-center space-x-1">
               <span className="font-semibold text-xs sm:text-sm md:text-base truncate">{token.symbol}</span>
-              <div className="hidden sm:block">
-                {getStatusBadge()}
-              </div>
+              <div className="hidden sm:block">{getStatusBadge()}</div>
             </div>
             <div className="text-xs text-muted-foreground truncate">{token.name}</div>
-            <div className="sm:hidden mt-1">
-              {getStatusBadge()}
-            </div>
+            <div className="sm:hidden mt-1">{getStatusBadge()}</div>
           </div>
         </div>
       </TableCell>
@@ -124,9 +126,7 @@ export default function TokenRow({ token }) {
       </TableCell>
 
       <TableCell className="min-w-[120px] hidden md:table-cell p-2 sm:p-4">
-        <div className="flex flex-wrap gap-1 mb-1">
-          {getSafetyIndicators()}
-        </div>
+        <div className="flex flex-wrap gap-1 mb-1">{getSafetyIndicators()}</div>
         <div className="text-xs text-muted-foreground">{token.safetyScore}/10</div>
       </TableCell>
 

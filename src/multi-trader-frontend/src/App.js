@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./services/themes/ThemeContext";
 import { LanguageProvider } from "./services/i18n/LanguageContext";
 import Dashboard from "./pages/Dashboard";
+import "./index.css"; 
 
 // 🧪 Test Component
 function TestPage() {

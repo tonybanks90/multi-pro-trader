@@ -1,20 +1,15 @@
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle } from 'lucide-react';
-import TokenRow from './TokenRow';
-import { useLanguage } from '@/services/i18n/LanguageContext';
+// Import mock tokens from data.js
+import tokens from '@/data/data.js';
 
-export default function TokenTable({ tokens, isLoading, error, viewMode }) {
+console.log("📊 Loaded mock tokens from data.js:", tokens); // 🔍 Debug log
+
+export default function TokenTable({ isLoading, error, viewMode }) {
   const { t } = useLanguage();
 
+  console.log("🔄 TokenTable render - isLoading:", isLoading, "error:", error, "viewMode:", viewMode);
+
   if (error) {
+    console.log("❌ TokenTable error state triggered:", error);
     return (
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
@@ -26,6 +21,7 @@ export default function TokenTable({ tokens, isLoading, error, viewMode }) {
   }
 
   if (isLoading) {
+    console.log("⏳ TokenTable loading state - showing skeletons");
     return (
       <div className="bg-card rounded-xl border border-border overflow-hidden">
         <div className="p-6 space-y-4">
@@ -47,7 +43,10 @@ export default function TokenTable({ tokens, isLoading, error, viewMode }) {
     );
   }
 
+  console.log("📦 Tokens array length:", tokens.length);
+
   if (tokens.length === 0) {
+    console.log("⚠️ No tokens found in mock data");
     return (
       <div className="bg-card rounded-xl border border-border p-12 text-center">
         <div className="text-muted-foreground">
@@ -60,46 +59,50 @@ export default function TokenTable({ tokens, isLoading, error, viewMode }) {
   }
 
   if (viewMode === 'cards') {
+    console.log("💳 Rendering tokens in card view");
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {tokens.map((token) => (
-          <div key={token.id} className="bg-card rounded-xl border border-border p-4">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                <span className="text-primary font-bold text-sm">
-                  {token.symbol.slice(0, 3)}
-                </span>
+        {tokens.map((token) => {
+          console.log(`🪙 Rendering token card: ${token.symbol}`);
+          return (
+            <div key={token.id} className="bg-card rounded-xl border border-border p-4">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                  <span className="text-primary font-bold text-sm">
+                    {token.symbol.slice(0, 3)}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-semibold">{token.symbol}</h3>
+                  <p className="text-sm text-muted-foreground">{token.name}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold">{token.symbol}</h3>
-                <p className="text-sm text-muted-foreground">{token.name}</p>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Price:</span>
+                  <span className="font-semibold">${token.price}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Market Cap:</span>
+                  <span>${(parseFloat(token.marketCap) / 1000).toFixed(1)}K</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Volume:</span>
+                  <span>${(parseFloat(token.volume24h) / 1000).toFixed(1)}K</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Holders:</span>
+                  <span>{token.holders}</span>
+                </div>
               </div>
             </div>
-            
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Price:</span>
-                <span className="font-semibold">${token.price}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Market Cap:</span>
-                <span>${(parseFloat(token.marketCap) / 1000).toFixed(1)}K</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Volume:</span>
-                <span>${(parseFloat(token.volume24h) / 1000).toFixed(1)}K</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Holders:</span>
-                <span>{token.holders}</span>
-              </div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
   }
 
+  console.log("📋 Rendering tokens in table view");
   return (
     <div className="bg-card rounded-xl border border-border overflow-hidden">
       <div className="overflow-x-auto">
@@ -117,36 +120,12 @@ export default function TokenTable({ tokens, isLoading, error, viewMode }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {tokens.map((token) => (
-              <TokenRow key={token.id} token={token} />
-            ))}
+            {tokens.map((token) => {
+              console.log(`🪙 Rendering token row: ${token.symbol}`);
+              return <TokenRow key={token.id} token={token} />;
+            })}
           </TableBody>
         </Table>
-      </div>
-
-      {/* Pagination */}
-      <div className="flex items-center justify-between p-6 border-t">
-        <div className="text-sm text-muted-foreground">
-          Showing <span className="text-foreground">1-{tokens.length}</span> of{' '}
-          <span className="text-foreground">{tokens.length}</span> tokens
-        </div>
-        <div className="flex space-x-2">
-          <button className="px-3 py-2 bg-muted border border-border rounded hover:bg-muted/80 transition-colors">
-            Previous
-          </button>
-          <button className="px-3 py-2 bg-primary text-primary-foreground rounded font-medium">
-            1
-          </button>
-          <button className="px-3 py-2 bg-muted border border-border rounded hover:bg-muted/80 transition-colors">
-            2
-          </button>
-          <button className="px-3 py-2 bg-muted border border-border rounded hover:bg-muted/80 transition-colors">
-            3
-          </button>
-          <button className="px-3 py-2 bg-muted border border-border rounded hover:bg-muted/80 transition-colors">
-            Next
-          </button>
-        </div>
       </div>
     </div>
   );
