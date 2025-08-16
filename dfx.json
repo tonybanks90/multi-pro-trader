@@ -8,6 +8,10 @@
       "main": "src/multi-trader-backend/main.mo",
       "type": "motoko"
     },
+    "PumpPortal": {
+      "main": "src/multi-trader-backend/PumpPortal/pump.mo",
+      "type": "motoko"
+    },
     "wallet": {
       "dependencies": ["evm_rpc"],
       "main": "src/multi-trader-backend/Wallet/wallet.mo",

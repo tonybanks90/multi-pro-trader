@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const translations = {
-  'header.title': { en: 'GMGN.AI', zh: 'GMGN.AI' },
+  'header.title': { en: 'OMAXPro', zh: 'OMAXPro' },
   'header.subtitle': { en: 'Snipe MEME Tokens', zh: '狙击模因代币' },
   'nav.allTokens': { en: 'All Tokens', zh: '所有代币' },
   'nav.trenches': { en: 'Trenches', zh: '战壕' },
