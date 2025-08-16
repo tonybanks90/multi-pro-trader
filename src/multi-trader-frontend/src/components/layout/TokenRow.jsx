@@ -3,11 +3,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/services/i18n/LanguageContext';
 import { ChartLine } from 'lucide-react';
+import { useLocation } from 'wouter';
  // Import the token object
 
-export default function TokenRow() {
+export default function TokenRow( { token }) {
   const { t } = useLanguage();
 
+  console.log("TokenRow rendering... token =", token);
+  const [, navigate] = useLocation();
   console.log("TokenRow rendering... token =", token); // 🔍
   console.log("TokenRow type of token:", typeof token);
   console.log("TokenRow keys:", token ? Object.keys(token) : "token is undefined");
@@ -88,10 +91,22 @@ export default function TokenRow() {
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center space-x-1">
-              <span className="font-semibold text-xs sm:text-sm md:text-base truncate">{token.symbol}</span>
+              <button 
+                onClick={() => navigate(`/token/${token.id}`)}
+                className="font-semibold text-xs sm:text-sm md:text-base truncate hover:text-primary transition-colors cursor-pointer"
+                data-testid={`button-token-${token.id}`}
+              >
+                {token.symbol}
+              </button>
               <div className="hidden sm:block">{getStatusBadge()}</div>
             </div>
-            <div className="text-xs text-muted-foreground truncate">{token.name}</div>
+            <button 
+              onClick={() => navigate(`/token/${token.id}`)}
+              className="text-xs text-muted-foreground truncate hover:text-foreground transition-colors cursor-pointer text-left"
+              data-testid={`button-token-name-${token.id}`}
+            >
+              {token.name}
+            </button>
             <div className="sm:hidden mt-1">{getStatusBadge()}</div>
           </div>
         </div>
