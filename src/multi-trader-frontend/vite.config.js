@@ -31,7 +31,8 @@ export default defineConfig({
     react(),
     environment('all', { prefix: 'CANISTER_' }),
     environment('all', { prefix: 'DFX_' }),
-    tailwindcss(),
+    // Add the path to your main CSS file here
+    tailwindcss({ css: './src/index.css' }),
   ],
   resolve: {
     alias: [

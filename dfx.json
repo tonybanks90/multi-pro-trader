@@ -8,8 +8,8 @@
       "main": "src/multi-trader-backend/main.mo",
       "type": "motoko"
     },
-    "PumpPortal": {
-      "main": "src/multi-trader-backend/PumpPortal/pump.mo",
+    "OmaxRouter": {
+      "main": "src/multi-trader-backend/OmaxRouter/omaxkongroute.mo",
       "type": "motoko"
     },
     "wallet": {

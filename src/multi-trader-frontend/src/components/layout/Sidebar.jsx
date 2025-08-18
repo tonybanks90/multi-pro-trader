@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useLanguage } from '@/services/i18n/LanguageContext';
 import { Search, Rocket, Flame, Star, Shield } from 'lucide-react';
 
+
 export default function Sidebar({ filters, onFiltersChange }) {
   const { t } = useLanguage();
   const [localFilters, setLocalFilters] = useState(filters);
