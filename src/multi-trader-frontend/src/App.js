@@ -7,6 +7,8 @@ import { ThemeProvider } from "./services/themes/ThemeContext";
 import { LanguageProvider } from "./services/i18n/LanguageContext";
 import Dashboard from "./pages/Dashboard";
 import "./index.css"; 
+import "@nfid/identitykit/react/styles.css";
+
 
 // 🧪 Test Component
 function TestPage() {

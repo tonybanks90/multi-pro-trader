@@ -1,4 +1,7 @@
 /* Your main CSS file (e.g., index.css) */
+@import "tailwindcss/preflight"; /* replaces @tailwind base */
+@import "tailwindcss/utilities"; /* replaces @tailwind components + utilities */
+
 
 :root {
   /* Light Theme / Default Variables */
